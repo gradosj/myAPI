@@ -9,7 +9,7 @@ var app = express();
 require('./lib/connectMongoose');
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join('views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').__express);
 
@@ -32,8 +32,10 @@ app.use((req, res, next) => {
  * Routes
  */
 
-app.use('/api/anuncios', require('./routes/index'));
+app.use('/api/anuncios', require('./routes/anuncios'));
 app.use('/api/anuncios/post', require('./routes/api/anuncios'));
+
+console.log(app.use);
 
 /**
  * Rutas del website

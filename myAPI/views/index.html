@@ -1,88 +1,91 @@
-<!DOCTYPE html>
-<html>
+<% include header.html %>
 
-<head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-</head>
+<header class="masthead">
+  <div class="container h-100">
+    <div class="row h-100">
+      <div class="col-lg-7 my-auto">
+        <div class="header-content mx-auto">
 
-<body>
+          <body>
 
-  <style>
-    .anuncio {
-      border: 2px, black;
-      padding: 10px;
-      text-align: center;
-      margin: 5px;
+            <style>
+              .anuncio {
+                border: 2px, black;
+                padding: 10px;
+                text-align: center;
+                margin: 5px;
 
-    }
+              }
 
-    .foto {
-      margin: 5px;
-      /*padding: 20px; */
-    }
+              .foto {
+                margin: 5px;
+                /*padding: 20px; */
+              }
 
-    .nombre {
-      font-weight: bold;
-    }
+              .nombre {
+                font-weight: bold;
+              }
 
-    .img {
-      margin: auto;
-      display: block;
-    }
-  </style>
+              .img {
+                margin: auto;
+                display: block;
+              }
+            </style>
 
-  <img class="img" src='/images/logonode.jpg' alt="Generic placeholder image">
+            <img class="img" src='/images/logonode.jpg' alt="Generic placeholder image">
 
-  Tags disponibles: work, lifestyle, motor
-  y mobile
+            Tags disponibles: work, lifestyle, motor
+            y mobile
 
-   
-  <% anuncios.forEach(anuncio => { 
-    console.log('holi');
-    let venta;
 
-    if (anuncio.venta === true) {
-    
-    venta = 'Se vende';
-  } else { venta = 'Se busca'} 
-    %>
-   
+            <% anuncios.forEach(anuncio => { 
+              console.log('holi');
+              let venta;
+          
+              if (anuncio.venta === true) {
+              
+              venta = 'Se vende';
+            } else { venta = 'Se busca'} 
+              %>
 
-  <div class="media border">
-    <img class="align-self-start mr-3 foto" src="<%=anuncio.foto %>" alt=" Generic placeholder image">
-    <div class="media-body">
-      <h5> <%= anuncio.nombre %></h5>
-        <p class="card-text">  <%= venta %></p>
-        <p class="card-text"> Precio: <%= anuncio.precio %> €</p>
-        <p class="card-text"> Tags: <%= anuncio.tags %></p>
 
+            <div class="media border">
+              <img class="align-self-start mr-3 foto" src="<%=anuncio.foto %>" alt=" Generic placeholder image">
+              <div class="media-body">
+                <h5> <%= anuncio.nombre %></h5>
+                <p class="card-text"> <%= venta %></p>
+                <p class="card-text"> Precio: <%= anuncio.precio %> €</p>
+                <p class="card-text"> Tags: <%= anuncio.tags %></p>
+
+              </div>
+            </div>
+
+
+
+            <% }) %>
+
+            <script>
+
+              async function main() {
+
+
+              }
+
+            </script>
+
+          </body>
+
+
+
+
+
+
+        </div>
+      </div>
     </div>
   </div>
+</header>
 
 
 
-
-
-
-
-
-
-
-  <% }) %>
-
-  <script>
-
-    async function main() {
-
-
-    }
-
-  </script>
-
-</body>
-
-</html>
+<% include footer.html %>
