@@ -31,16 +31,19 @@ app.use((req, res, next) => {
 /**
  * Routes
  */
+const loginController = require('./routes/loginController');
+
+app.use('/',      require('./routes/index'));
 
 app.use('/api/anuncios', require('./routes/anuncios'));
 app.use('/api/anuncios/post', require('./routes/api/anuncios'));
 
-console.log(app.use);
+//aqui usamos metodos directamente
+app.get('/login', loginController.index);
+app.post('/login', loginController.post); // --> Para el post
 
-/**
- * Rutas del website
- */
-app.use('/',      require('./routes/index'));
+
+
 
 
 // catch 404 and forward to error handler
