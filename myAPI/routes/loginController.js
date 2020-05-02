@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const Usuario = require('../models/Usuario');
 
 
+
 class LoginController {
 
 
@@ -41,6 +42,16 @@ class LoginController {
       }
 
       // encuentro el usuario y la password es correcta
+
+
+      //apuntar el id de usuario en la sesion del usuario. 
+      // el req.session es donde se almancena la informacion del
+      // express-session
+      req.session.authUser = { /*llamamos al atributo como queramos */
+        _id: usuario._id
+
+      };
+      console.log('pasa por aqui*********************', req.session.authUser);
       res.redirect('/private');
     } catch (err) {
       next(err);

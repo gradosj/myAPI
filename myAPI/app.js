@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
+const session = require('express-session');
 
 // connect to database
 require('./lib/connectMongoose');
@@ -28,8 +29,27 @@ app.use((req, res, next) => {
 
 });
 
+
+/* rutas del api */ 
+app.use('/api/anuncios/post', require('./routes/api/anuncios'));
+
+
+/** Inicializamos el sistema de sesiones */
+// este middleware saltara en cada peticion
+
+app.use(session({
+  name: 'nodeapi-session', /*nombre de la cookie que vamos a utilizar para la sesion */
+  secret: '1earfgqpoeitunm12asdf421hepoi', /* evita utilizar patrones de numeracion */
+  saveUninitialized: true, /* cuando no hemos metido nada en la "caja" se crea auto */
+  cookie: {
+      secure: false, /* el browser solo la envcia al servidor solo si usa https */
+      maxAge: 1000 * 60 * 60 * 24 * 2, // (2 dias )cuando caduca la sesion por inactividad
+    }
+}));
+
+
 /**
- * Routes
+ * Routes del website
  */
 const loginController = require('./routes/loginController');
 const privateController = require('./routes/privateControler')
@@ -37,7 +57,7 @@ const privateController = require('./routes/privateControler')
 app.use('/', require('./routes/index'));
 
 app.use('/api/anuncios', require('./routes/anuncios'));
-app.use('/api/anuncios/post', require('./routes/api/anuncios'));
+
 
 //aqui usamos metodos directamente
 app.get('/login', loginController.index);
