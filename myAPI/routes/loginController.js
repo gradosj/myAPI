@@ -1,5 +1,8 @@
 'use strict';
 
+const bcrypt = require('bcrypt');
+const Usuario = require('../models/Usuario');
+
 
 class LoginController {
 
@@ -7,6 +10,7 @@ class LoginController {
   /* Peticion get a /login */
   index(req, res, next) {
     res.locals.email = ''; /* con esto le estamos añadiendo la variable de la vista email */
+    res.locals.error = '';
     res.render('login.html');
 
   }
@@ -14,16 +18,33 @@ class LoginController {
 
   /**Peticion post a /login  */
 
-  post(req,res,next){
-    // recoger los parametros de entrada
-    const email = req.body.email; 
-    const password = req.body.password;-
+  async post(req, res, next) {
+    try {
+      // recoger los parametros de entrada
+      const email = req.body.email;
+      const password = req.body.password;
 
+      // buscar el usuario en la base de datos
 
-    console.log(email, password);
-    res.locals.email = email; /* le devolvemos a la pagina el mail para no tener que ponerlo */
-    res.render('login');
+      const usuario = await Usuario.findOne({ email: email });
 
+      // si no existe el usuario o la password no coincide
+
+     // if (!usuario || usuario.password !== password) { sin cifrar
+     if (!usuario || !await bcrypt.compare(password, usuario.password) ) { //cifrada 
+        console.log(email, password);
+        res.locals.email = email; /* le devolvemos a la pagina el mail para no tener que ponerlo */
+        res.locals.error = ('Invalid credentials');
+        res.render('login');
+        return;
+
+      }
+
+      // encuentro el usuario y la password es correcta
+      res.redirect('/private');
+    } catch (err) {
+      next(err);
+    }
   }
 }
 

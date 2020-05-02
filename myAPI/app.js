@@ -23,17 +23,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.locals.title = 'NodeAPI'; // variables locales en todas las vistas
 
 app.use((req, res, next) => {
-  
+
   next();
- 
+
 });
 
 /**
  * Routes
  */
 const loginController = require('./routes/loginController');
+const privateController = require('./routes/privateControler')
 
-app.use('/',      require('./routes/index'));
+app.use('/', require('./routes/index'));
 
 app.use('/api/anuncios', require('./routes/anuncios'));
 app.use('/api/anuncios/post', require('./routes/api/anuncios'));
@@ -41,23 +42,24 @@ app.use('/api/anuncios/post', require('./routes/api/anuncios'));
 //aqui usamos metodos directamente
 app.get('/login', loginController.index);
 app.post('/login', loginController.post); // --> Para el post
+app.get('/private', privateController.index);
 
 
 
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   if (err.array) { // error de validación
     err.status = 422;
     const errInfo = err.array({ onlyFirstError: true })[0];
     err.message = isAPIRequest(req) ?
-      { message: 'Not valid', errors: err.mapped()}
+      { message: 'Not valid', errors: err.mapped() }
       : `El parámetro ${errInfo.param} ${errInfo.msg}`;
   }
 
@@ -76,7 +78,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-function isAPIRequest(req) {
+function isAPIRequest(req) {
   return req.originalUrl.startsWith('/api/');
 }
 

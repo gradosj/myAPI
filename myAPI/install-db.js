@@ -2,11 +2,13 @@
 
 const conn = require('./lib/connectMongoose');
 const Anuncio = require('./models/anuncios');
+const Usuario = require('./models/usuario');
 
 
 conn.once('open', async () => {
     try {
         await initAnuncios();
+        await initUsuarios();
         conn.close();
     } catch(err){
         console.error('hubo un error: ', err);
@@ -56,6 +58,24 @@ async function initAnuncios() {
         foto: '/images/lifestyle.jpg',
         tags: ['lifestyle']
     },
+
+    ]);
+
+}
+
+
+async function initUsuarios() {
+    await Usuario.deleteMany();
+    await Usuario.insertMany([
+    {   
+        email: 'user@example.com',
+        password: await Usuario.hashPassword('1234'),
+    },
+
+    {   
+        email: 'jose@example.com',
+        password: await Usuario.hashPassword('1234'),
+    }
 
     ]);
 
