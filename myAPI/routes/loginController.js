@@ -57,6 +57,23 @@ class LoginController {
       next(err);
     }
   }
+
+/* GET / logaut */
+
+logout(req, res, next) {
+  req.session.regenerate(err => { //esto es un metodo expecifico de express-session para borrar la sesion */
+    if (err) {
+      next(err); /* si hay error */
+      return;
+    }
+
+    res.redirect('/');
+
+  }) 
+}
+
+
+
 }
 
 module.exports = new LoginController();

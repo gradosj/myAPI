@@ -3,11 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var app = express();
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
+var app = express();
 // connect to database
-require('./lib/connectMongoose');
+const mongooseConecction = require('./lib/connectMongoose');
 
 // view engine setup
 app.set('views', path.join('views'));
@@ -36,6 +37,7 @@ app.use('/api/anuncios/post', require('./routes/api/anuncios'));
 
 /** Inicializamos el sistema de sesiones */
 // este middleware saltara en cada peticion
+console.log(mongooseConecction);
 
 app.use(session({
   name: 'nodeapi-session', /*nombre de la cookie que vamos a utilizar para la sesion */
@@ -44,15 +46,28 @@ app.use(session({
   cookie: {
       secure: false, /* el browser solo la envcia al servidor solo si usa https */
       maxAge: 1000 * 60 * 60 * 24 * 2, // (2 dias )cuando caduca la sesion por inactividad
-    }
+    },
+  //store: new MongoStore({   CONSULTAR CON JAVIER
+  //  //le pasamos la conexion a la base de datos
+  //  mongooseConecction: mongooseConecction 
+  //})
 }));
 
 
 /**
  * Routes del website
  */
+const sesisionAuth    = require('./lib/sessionAuth');
 const loginController = require('./routes/loginController');
-const privateController = require('./routes/privateControler')
+const privateController = require('./routes/privateControler');
+
+//hacer disponible el objeto de session en las vistas
+app.use((req, res, next) =>{
+
+  res.locals.session = req.session; // con esto tendremos en las variables de vista la sesion de cada usuario disponible
+  next();
+
+});
 
 app.use('/', require('./routes/index'));
 
@@ -62,7 +77,11 @@ app.use('/api/anuncios', require('./routes/anuncios'));
 //aqui usamos metodos directamente
 app.get('/login', loginController.index);
 app.post('/login', loginController.post); // --> Para el post
-app.get('/private', privateController.index);
+app.get('/logout', loginController.logout);
+// devuelve un middleware que valida que el usuario está logado y tiene rol necesario-
+app.get('/private', sesisionAuth(['admin']), privateController.index); // el sessionauut se ha creado pora que se llame antes
+                                                            // de cualquier pogina que requiera un control de el inicio
+                                                            // de sesion
 
 
 
