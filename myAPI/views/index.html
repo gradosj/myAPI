@@ -32,9 +32,10 @@
               }
             </style>
 
+
             <img class="img" src='/images/logonode.jpg' alt="Generic placeholder image">
 
-            Tags disponibles: work, lifestyle, motor
+            <%= __('Tags avalailables:') %> work, lifestyle, motor
             y mobile
 
 
@@ -44,8 +45,8 @@
           
               if (anuncio.venta === true) {
               
-              venta = 'Se vende';
-            } else { venta = 'Se busca'} 
+              venta =  __('For sale'); 
+            } else { venta = __('Wanted');} 
               %>
 
 
@@ -54,7 +55,7 @@
               <div class="media-body">
                 <h5> <%= anuncio.nombre %></h5>
                 <p class="card-text"> <%= venta %></p>
-                <p class="card-text"> Precio: <%= anuncio.precio %> €</p>
+                <p class="card-text"> <% __('Price:') %> <%= anuncio.precio %> €</p>
                 <p class="card-text"> Tags: <%= anuncio.tags %></p>
 
               </div>
@@ -74,17 +75,6 @@
             </script>
 
           </body>
-
-
-
-
-
-
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
 
 
 

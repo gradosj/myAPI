@@ -106,7 +106,7 @@ class LoginController {
       console.log('antes del token')
       // crear un JWT +
 
-      console.log(process.env.JWT_SECRET)
+    
       //Asi lo hacemos de manera sincrona
       const token = jwt.sign({_id: usuario._id},
                              '+oHZ-&}j7y^zd0d{]D9t%j!FL~Y3n]:&va§7Rnygl]vCt|O{^w5<§<&)5fNo@MPi',
@@ -114,11 +114,10 @@ class LoginController {
                               expiresIn: '2d' //es importante poner el tiempo de expiracion
                               });
 
-      console.log(token);
-
       //responder
 
       res.json({token: token});
+      
 
     } catch (err) {
       next(err);

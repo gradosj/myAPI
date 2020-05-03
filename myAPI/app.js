@@ -10,6 +10,9 @@ var app = express();
 // connect to database
 const mongooseConecction = require('./lib/connectMongoose');
 
+
+
+
 // view engine setup
 app.set('views', path.join('views'));
 app.set('view engine', 'html');
@@ -21,6 +24,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/* setup de i18n */
+const i18n = require('./lib/i18nConfigure')(); /* como retorna funcion le ponemos los parentesis para ejecutarla */
+
+app.use(i18n.init);
 
 app.locals.title = 'NodeAPI'; // variables locales en todas las vistas
 
@@ -80,6 +87,7 @@ app.use((req, res, next) =>{
 });
 
 app.use('/', require('./routes/index'));
+app.use('/change-locale', require ('./routes/change-locale'));
 
 
 
