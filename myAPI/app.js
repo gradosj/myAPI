@@ -30,9 +30,19 @@ app.use((req, res, next) => {
 
 });
 
+const loginController = require('./routes/loginController');
+const jwtAuth = require('./lib/jwtAuth'); // cargamos el generador de middlewares de jwt
 
+console.log(jwtAuth);
 /* rutas del api */ 
-app.use('/api/anuncios/post', require('./routes/api/anuncios'));
+
+
+app.use('/api/anuncios', jwtAuth(), require('./routes/anuncios'));
+app.use('/api/anuncios/post',jwtAuth(), require('./routes/api/anuncios'));
+
+app.use('/api/authenticate', loginController.postJWT);
+
+
 
 
 /** Inicializamos el sistema de sesiones */
@@ -58,7 +68,7 @@ app.use(session({
  * Routes del website
  */
 const sesisionAuth    = require('./lib/sessionAuth');
-const loginController = require('./routes/loginController');
+
 const privateController = require('./routes/privateControler');
 
 //hacer disponible el objeto de session en las vistas
@@ -71,7 +81,8 @@ app.use((req, res, next) =>{
 
 app.use('/', require('./routes/index'));
 
-app.use('/api/anuncios', require('./routes/anuncios'));
+
+
 
 
 //aqui usamos metodos directamente
