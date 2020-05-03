@@ -3,9 +3,6 @@
 const jwt = require('jsonwebtoken');
 
 
-
-
-
 module.exports = function() {
     return (req, res, next) => {
 

@@ -51,18 +51,18 @@
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
           </li>
          
-          <% if (!session.authUser) { %>
+          <%/* if (!session.authUser) {*/ %>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/login">LogIn </a>
             </li>
-          <% } else { %>
+          <%/* } else { */%>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/logout">LogOut</a>
           </li>
             <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="/private">Privado</a>
           </li>
-        <% } %>
+        <%/* }*/ %>
 
         </ul>
       </div>
