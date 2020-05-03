@@ -13,3 +13,9 @@
     .form_check {
         padding-left: 20px;
     }
+
+    
+    .col-lg-7{
+        text-align: center;
+        position: static; 
+        }
