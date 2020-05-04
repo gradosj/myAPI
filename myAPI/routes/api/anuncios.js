@@ -3,18 +3,35 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const path = require('path');
 
 const Anuncio = require('../../models/anuncios');
 const { check, validationResult } = require('express-validator');
 
-const storage = multer.diskStorage({
+const storage = multer.diskStorage({ /* donde se guarda -- este es el que suele da problemas */
     destination: function (req, file, cb) {
-        cb(null, `${file.fieldname}-${Date.now()}`);
+        cb(null, path.join(__dirname, '..', '..', 'uploads'));
+    },
+    filename: function (req, file, cb) { /*de donde se recupera */
+        //cb(null, `${file.fieldname}-${Date.now()}`);
+        console.log('aquuuuuuuuuuuuuuuuuuuuuiiiiiiiiiiiiiii', file.originalname);
+        const originalName = file.originalname;
+        const nameArr = originalName.split('.');
+        console.log(nameArr);
+        let extension = '';
+
+        console.log(nameArr.length);
+        if (nameArr.length > 1) {
+            extension = nameArr[nameArr.length - 1];
+        }
+        console.log(extension);
+        // cb(null, file.fieldname + Date.now() + '.' + extension);
+        cb(null, `${file.fieldname} - ${Date.now()}.${extension}`);
     }
 
 });
 
-const upload = multer({storage});
+const upload = multer({ storage });
 
 
 router.get('/', async (req, res, next) => {
@@ -47,7 +64,7 @@ router.get('/', async (req, res, next) => {
 
         }
 
-     
+
 
         if (precio !== undefined) {
 
@@ -108,22 +125,23 @@ router.post('/', upload.single('foto'),
     check('nombre').isString(),
     check('venta').isBoolean(),
     check('precio').isNumeric(),
-   // check('foto').isString(),
+    // check('foto').isString(),
     async (req, res, next) => {
         try {
             const errors = validationResult(req);
             const listaTags = ['motor', 'lifestyle', 'mobile', 'work'];
             let cont = 0;
-            let encontrado = false;
+            let encontrado = true;
 
             console.log(req.body);
 
             while (cont < listaTags.length && encontrado === false) {
-                
-                if (listaTags[cont] === req.body.tags) {
 
+                if (listaTags[cont] == req.body.tags) {
+                    console.log(listaTags[cont]);
+                    console.log(req.body.tags);
                     encontrado === true;
-                }
+                } else { encontrado === false; }
 
                 cont++;
 
@@ -143,7 +161,7 @@ router.post('/', upload.single('foto'),
 
             const anuncioData = req.body;
             const anuncio = new Anuncio(anuncioData);
-            const anuncioGuardado = await anuncio.save(); 
+            const anuncioGuardado = await anuncio.save();
             res.status(201).json({ result: anuncioGuardado })
         } catch (err) {
             next(err);
