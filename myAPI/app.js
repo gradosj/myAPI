@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const multer = require('multer');
 
 var app = express();
 // connect to database

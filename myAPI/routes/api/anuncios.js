@@ -2,9 +2,19 @@
 
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 
 const Anuncio = require('../../models/anuncios');
 const { check, validationResult } = require('express-validator');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, `${file.fieldname}-${Date.now()}`);
+    }
+
+});
+
+const upload = multer({storage});
 
 
 router.get('/', async (req, res, next) => {
@@ -94,11 +104,11 @@ router.get('/:id', async (req, res, next) => {
 });
 
 // Crea un anuncio
-router.post('/',
+router.post('/', upload.single('foto'),
     check('nombre').isString(),
     check('venta').isBoolean(),
     check('precio').isNumeric(),
-    check('foto').isString(),
+   // check('foto').isString(),
     async (req, res, next) => {
         try {
             const errors = validationResult(req);
@@ -106,8 +116,10 @@ router.post('/',
             let cont = 0;
             let encontrado = false;
 
+            console.log(req.body);
+
             while (cont < listaTags.length && encontrado === false) {
-                console.log(req.body.tags);
+                
                 if (listaTags[cont] === req.body.tags) {
 
                     encontrado === true;
