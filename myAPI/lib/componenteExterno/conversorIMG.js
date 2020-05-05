@@ -9,8 +9,6 @@ const path = require('path');
 const responder = new cote.Responder({ name: 'currency responder' });
 
 
-
-
 responder.on(
     'resize image', (req, done) => {
 
