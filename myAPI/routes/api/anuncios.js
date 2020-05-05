@@ -7,7 +7,7 @@ const path = require('path');
 const cote = require('cote');
 const Anuncio = require('../../models/anuncios');
 const { check, validationResult } = require('express-validator');
-const rutaDestino = path.join(__dirname, '..', '..', 'uploads');
+const rutaDestino = path.join(__dirname, '..', '..', 'public', 'images', 'uploads');
 const imagesTypes = ['jpg', 'png', 'bmp', 'jpeg'];
 const barra = "\\";
 
@@ -186,7 +186,7 @@ router.post('/', upload.single('foto'),
                err.status = 422;
                return next(err);
            } else {
-               req.body.foto = nombreFichero;
+               req.body.foto = `mini${nombreFichero}`;
                console.log(req.body.foto);
            }
 
