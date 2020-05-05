@@ -30,6 +30,12 @@ const i18n = require('./lib/i18nConfigure')(); /* como retorna funcion le ponemo
 
 app.use(i18n.init);
 
+/* jimp quitar */ 
+
+
+/* codigo jimp */
+
+
 app.locals.title = 'NodeAPI'; // variables locales en todas las vistas
 
 app.use((req, res, next) => {
