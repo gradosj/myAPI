@@ -131,11 +131,20 @@ router.post('/', upload.single('foto'),
             const errors = validationResult(req);
             const listaTags = ['motor', 'lifestyle', 'mobile', 'work'];
             let cont = 0;
-            let encontrado = true;
+            let encontrado = false;
 
             console.log(req.body);
 
+            console.log('1', listaTags[cont], typeof(listaTags[cont]) );
+            console.log('2', req.body.tags, typeof(req.body.tags));
+
+                if (listaTags[1] == req.body.tags ) {
+                    console.log('entra');
+                } else {console.log('los cojones')}
+
             while (cont < listaTags.length && encontrado === false) {
+
+                
 
                 if (listaTags[cont] == req.body.tags) {
                     console.log(listaTags[cont]);
