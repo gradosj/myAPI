@@ -3,6 +3,7 @@
 const jwt = require('jsonwebtoken');
 
 
+
 module.exports = function() {
     return (req, res, next) => {
 
@@ -25,8 +26,7 @@ module.exports = function() {
 
         //verificar si el token es valido 
 
-        jwt.verify(token,
-                  '+oHZ-&}j7y^zd0d{]D9t%j!FL~Y3n]:&va§7Rnygl]vCt|O{^w5<§<&)5fNo@MPi',
+        jwt.verify(token,JWT_SECRET,
                   (err, payload) => {
                       if (err) {
                           const error = new Error('invalid token');

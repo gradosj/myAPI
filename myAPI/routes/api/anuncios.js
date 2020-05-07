@@ -8,13 +8,11 @@ const cote = require('cote');
 const Anuncio = require('../../models/anuncios');
 const { check, validationResult } = require('express-validator');
 const rutaDestino = path.join(__dirname, '..', '..', 'public', 'images', 'uploads');
-const imagesTypes = ['jpg', 'png', 'bmp', 'jpeg'];
 const barra = "\\";
 
 let nombreFichero = '';
 let rutaTotal = ''; // Utilizamos esta ruta para enviar la peticion
 let extension = '';
-
 
 
 const storage = multer.diskStorage({ /* donde se guarda -- este es el que suele da problemas */
@@ -27,7 +25,7 @@ const storage = multer.diskStorage({ /* donde se guarda -- este es el que suele 
         const originalName = file.originalname;
         const nameArr = originalName.split('.');
         console.log(nameArr);
-        
+
 
         console.log(nameArr.length);
         if (nameArr.length > 1) {
@@ -146,29 +144,25 @@ router.post('/', upload.single('foto'),
             const errors = validationResult(req);
             const listaTags = ['motor', 'lifestyle', 'mobile', 'work'];
             let cont = 0;
-            let encontrado = true;
+            let encontrado = false;
 
-            
-
-            console.log('1', listaTags[cont], typeof (listaTags[cont]));
-            console.log('2', req.body.tags, typeof (req.body.tags));
-            console.log(Date.now());
-/*
-            if (listaTags[1] == req.body.tags) {
-                console.log('entra');
-            } else { console.log('los cojones') }
+    
+            console.log('asdasdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
 
             while (cont < listaTags.length && encontrado === false) {
                 if (listaTags[cont] == req.body.tags) {
-                    console.log(listaTags[cont]);
-                    console.log(req.body.tags);
-                    encontrado === true;
+                    console.log('entra en el if');
+                    encontrado = true;
+                    console.log(encontrado);
                 } else { encontrado === false; }
 
                 cont++;
 
             }
-*/
+
+            console.log(encontrado);
+
+
             if (encontrado === false) {
                 const err = new Error('Error tags, use: motor, lifestyle, mobile, work');
                 err.status = 422;
@@ -176,40 +170,34 @@ router.post('/', upload.single('foto'),
 
             }
 
-
-          if (extension != 'png'
-          &&  extension != 'jpg'
-          &&  extension != 'bmp'
-          &&  extension != 'jpeg'
-           ) {
-               const err = new Error('Formato de archivo incorrecto');
-               err.status = 422;
-               return next(err);
-           } else {
-               req.body.foto = `mini${nombreFichero}`;
-               console.log(req.body.foto);
-           }
-
-                       
-
+            if (extension != 'png'
+                && extension != 'jpg'
+                && extension != 'bmp'
+                && extension != 'jpeg'
+            ) {
+                const err = new Error('Formato de archivo incorrecto');
+                err.status = 422;
+                return next(err);
+            } else {
+                req.body.foto = `mini${nombreFichero}`;
+                console.log(req.body.foto);
+            }
 
             if (!errors.isEmpty()) {
                 return res.status(422).json({ errors: errors.array() }); //Validations response
             } else {
 
-                const requester = new cote.Requester({ name: 'currency client'});
+                const requester = new cote.Requester({ name: 'currency client' });
 
                 requester.send({
                     type: 'resize image',
                     name: nombreFichero,
-                    
+
                 }, resultado => {
                     console.log('respuesta: ', resultado, ' ', Date.now());
                 });
-    
+
             }
-
-
 
             const anuncioData = req.body;
             const anuncio = new Anuncio(anuncioData);

@@ -21,7 +21,7 @@ responder.on(
             await image.resize(100, 100);
             // Save and overwrite the image
          //   await image.writeAsync(`test/Mini_${req.name}`);
-            await image.writeAsync(path.join(__dirname, '..', '..', 'public', 'images', 'uploads', `Mini${req.name}`));
+            await image.writeAsync(path.join(__dirname, '..', '..', 'public', 'images', 'uploads', `mini${req.name}`));
         }
 
         console.log(path.join(__dirname, '..', '..', 'uploads'));
