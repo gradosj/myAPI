@@ -26,7 +26,7 @@ async function initAnuncios() {
         nombre: 'bicicleta',
         venta: true,            
         precio: 200,
-        foto: '/images/motor.jpg',
+        foto: 'motor.jpg',
         tags: ['lifestyle', 'motor']
     },
 
@@ -34,28 +34,28 @@ async function initAnuncios() {
         nombre: 'iphone',
         venta: true,            
         precio: 500,
-        foto: '/images/mobile.jpg',
+        foto: 'mobile.jpg',
         tags: ['lifestyle', 'mobile']
     },
     {   
         nombre: 'pantalla',
         venta: false,            
         precio: 150,
-        foto: '/images/work.jpg',
+        foto: 'work.jpg',
         tags: ['work']
     },
     {   
         nombre: 'mascarilla',
         venta: false,            
         precio: 0.50,
-        foto: '/images/work.jpg',
+        foto: 'work.jpg',
         tags: ['lifestyle', 'mobile']
     },
     {   
         nombre: 'sudadera',
         venta: false,            
         precio: 10,
-        foto: '/images/lifestyle.jpg',
+        foto: 'lifestyle.jpg',
         tags: ['lifestyle']
     },
 

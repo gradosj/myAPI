@@ -32,11 +32,40 @@ npm run dev
 # Metodos
 La V1 de la API tiene dos funcionalidades, la lista y la creacion de anuncion (GEST y POST).
 
-# Post
-Para publicar un anuncio hay que realizar una peticion POST a la direccion:
+# Autenticacion
+Para empezar es necesario realizar una peticion post para el login. Esta peticion devolvera el token que puede utilizarse para el resto de funcionalidades pasandoselo como query param. 
 
 ```
-url/api/anuncios/post
+url/api/authenticate
+```
+
+Hay creados dos usuarios / passwords 
+
+```
+ jose@example.com // user@example.com password: 1234
+
+``` 
+
+# Post
+Para publicar un anuncio hay que realizar una peticion POST con el token recuperado en la autenticacion: 
+
+```
+url/api/anuncios/post?token=xxxxxxxxx
+
+```
+
+Las imagenes subidas se guardan en la carpeta 
+
+```
+public\images\uploads
+```
+
+### Microservicio
+Se ha creado un microservicio para realizar una miniatura de la imagen creada en el POST, para la ejecucion se debe lanzar el proceso de: 
+
+```
+myAPI/lib/componenteExterno/comversorIMG.js
+comando: npm run conversorIMG.js
 
 ```
 
