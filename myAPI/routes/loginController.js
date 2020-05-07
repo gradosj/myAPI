@@ -34,7 +34,7 @@ class LoginController {
 
       // if (!usuario || usuario.password !== password) { sin cifrar
       if (!usuario || !await bcrypt.compare(password, usuario.password)) { //cifrada 
-        console.log(email, password);
+       
         res.locals.email = email; /* le devolvemos a la pagina el mail para no tener que ponerlo */
         res.locals.error = ('Invalid credentials');
         res.render('login');
@@ -52,7 +52,7 @@ class LoginController {
         _id: usuario._id
 
       };
-      console.log('pasa por aqui*********************', req.session.authUser);
+    
       res.redirect('/private');
     } catch (err) {
       next(err);
@@ -81,10 +81,7 @@ class LoginController {
       const email = req.body.email;
       const password = req.body.password;
 
-      console.log(email);
-      console.log(password);
-
-      // buscar el usuario en la base de datos
+       // buscar el usuario en la base de datos
 
       const usuario = await Usuario.findOne({ email: email });
 
@@ -92,8 +89,7 @@ class LoginController {
 
       // if (!usuario || usuario.password !== password) { sin cifrar
       if (!usuario || !await bcrypt.compare(password, usuario.password)) { //cifrada 
-        console.log(email, password);
-        const error = new Error('invalid credentials');
+               const error = new Error('invalid credentials');
         error.status = 401;
         next(error);
         return;
@@ -103,13 +99,13 @@ class LoginController {
       // encuentro el usuario y la password es correcta
 
       
-      console.log('antes del token')
+ 
       // crear un JWT +
 
     
       //Asi lo hacemos de manera sincrona
       const token = jwt.sign({_id: usuario._id},
-                             '+oHZ-&}j7y^zd0d{]D9t%j!FL~Y3n]:&va§7Rnygl]vCt|O{^w5<§<&)5fNo@MPi',
+                              process.env.JWT_SECRET,
                              { //el process.env es el fichero que hemos creado en la raiz para las pass
                               expiresIn: '2d' //es importante poner el tiempo de expiracion
                               });
@@ -123,9 +119,6 @@ class LoginController {
       next(err);
     }
   }
-
-
-
 
 
 }

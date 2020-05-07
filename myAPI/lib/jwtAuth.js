@@ -7,13 +7,13 @@ const jwt = require('jsonwebtoken');
 module.exports = function() {
     return (req, res, next) => {
 
-        console.log(req.get('Authorization'));
+       // console.log(req.get('Authorization'));
         //recoger el token de la petición
         const token = req.get('Authorization') || // asi lo sacamos de la cabecera
                       req.query.token          ||
                       req.body.token;
 
-        console.log(token);
+        
 
 
         // si no nos da token no pueden pasar

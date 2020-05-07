@@ -15,7 +15,7 @@ const anuncioSchema = mongoose.Schema({
 });
 
 anuncioSchema.statics.lista = function (filtro, limit, skip, sort, fields) {
-    console.log(Anuncio.find); 
+   // console.log(Anuncio.find); 
     const query = Anuncio.find(filtro); 
 
     query.limit(limit);
@@ -29,7 +29,7 @@ anuncioSchema.statics.lista = function (filtro, limit, skip, sort, fields) {
 const Anuncio = mongoose.model('Anuncio', anuncioSchema);
 
 
-console.log('Fin anuncio.js')
+
 
 //exportamos el modelo
 module.exports = Anuncio;

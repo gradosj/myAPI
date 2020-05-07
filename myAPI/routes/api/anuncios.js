@@ -21,21 +21,20 @@ const storage = multer.diskStorage({ /* donde se guarda -- este es el que suele 
     },
     filename: function (req, file, cb) { /*de donde se recupera */
         //cb(null, `${file.fieldname}-${Date.now()}`);
-        console.log('aquuuuuuuuuuuuuuuuuuuuuiiiiiiiiiiiiiii', file.originalname);
+      
         const originalName = file.originalname;
         const nameArr = originalName.split('.');
-        console.log(nameArr);
+       
 
 
-        console.log(nameArr.length);
+       
         if (nameArr.length > 1) {
             extension = nameArr[nameArr.length - 1];
         }
 
         nombreFichero = `${file.fieldname} - ${Date.now()}.${extension}`;
         rutaTotal = `${rutaDestino}${barra}${nombreFichero}`;
-        console.log('La ruta es: --------------------------------------> ', nombreFichero);
-        console.log(' La ruta completa es :', rutaTotal);
+       
 
         // cb(null, file.fieldname + Date.now() + '.' + extension);
         cb(null, nombreFichero);
@@ -147,20 +146,20 @@ router.post('/', upload.single('foto'),
             let encontrado = false;
 
     
-            console.log('asdasdasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+          
 
             while (cont < listaTags.length && encontrado === false) {
                 if (listaTags[cont] == req.body.tags) {
-                    console.log('entra en el if');
+                   
                     encontrado = true;
-                    console.log(encontrado);
+                  
                 } else { encontrado === false; }
 
                 cont++;
 
             }
 
-            console.log(encontrado);
+         
 
 
             if (encontrado === false) {
@@ -180,7 +179,7 @@ router.post('/', upload.single('foto'),
                 return next(err);
             } else {
                 req.body.foto = `mini${nombreFichero}`;
-                console.log(req.body.foto);
+               
             }
 
             if (!errors.isEmpty()) {

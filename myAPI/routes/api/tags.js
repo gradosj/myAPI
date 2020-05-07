@@ -5,7 +5,7 @@ var router = express.Router();
 //modelo
 const Tag = require('../../models/tags');
 
-console.log('entramos en API/TAGS')
+
 //Petición GET:
 router.get('/', async (req, res, next) => {
     try {

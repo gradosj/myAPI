@@ -47,7 +47,7 @@ app.use((req, res, next) => {
 const loginController = require('./routes/loginController');
 const jwtAuth = require('./lib/jwtAuth'); // cargamos el generador de middlewares de jwt
 
-console.log(jwtAuth);
+//console.log(jwtAuth);
 /* rutas del api */ 
 
 
