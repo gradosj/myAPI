@@ -24,9 +24,6 @@ responder.on(
             await image.writeAsync(path.join(__dirname, '..', '..', 'public', 'images', 'uploads', `mini${req.name}`));
         }
 
-        console.log(path.join(__dirname, '..', '..', 'uploads'));
-        console.log(path.join(__dirname, '..', '..', 'public', 'images', 'uploads'));
-        console.log('servicio:', req.name);
 
         resize(req.name);
 

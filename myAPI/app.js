@@ -61,7 +61,6 @@ app.use('/api/authenticate', loginController.postJWT);
 
 /** Inicializamos el sistema de sesiones */
 // este middleware saltara en cada peticion
-console.log(mongooseConecction);
 
 app.use(session({
   name: 'nodeapi-session', /*nombre de la cookie que vamos a utilizar para la sesion */
