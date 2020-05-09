@@ -25,8 +25,6 @@ const storage = multer.diskStorage({ /* donde se guarda -- este es el que suele 
         const originalName = file.originalname;
         const nameArr = originalName.split('.');
        
-
-
        
         if (nameArr.length > 1) {
             extension = nameArr[nameArr.length - 1];

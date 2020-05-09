@@ -14,7 +14,7 @@ responder.on(
 
         async function resize(rute) {
             // Read the image.
-           // const image = await Jimp.read('https://images.pexels.com/photos/298842/pexels-photo-298842.jpeg');
+           
             const image = await Jimp.read(path.join(__dirname, '..', '..', 'public', 'images', 'uploads', req.name));
             // Resize the image to width 150 and heigth 150. 
            // Resize the image to width 150 and heigth 150.
