@@ -1,0 +1,76 @@
+<% include header.html %>
+
+<header>
+
+  <body class="h-100">
+
+    <style>
+      .anuncio {
+        border: 2px, black;
+        padding: 10px;
+        text-align: center;
+        margin: 5px;
+
+      }
+
+      .foto {
+        margin: 5px;
+        /*padding: 20px; */
+      }
+
+      .nombre {
+        font-weight: bold;
+      }
+
+      .img {
+        margin: auto;
+        display: block;
+      }
+    </style>
+
+
+    <img class="img" src='/images/logonode.jpg' alt="Generic placeholder image">
+
+    <%= __('Tags avalailables:') %> work, lifestyle, motor
+    y mobile
+
+
+    <% anuncios.forEach(anuncio => { 
+              console.log('holi');
+              let venta;
+          
+              if (anuncio.venta === true) {
+              
+              venta =  __('For sale'); 
+            } else { venta = __('Wanted');} 
+              %>
+
+
+    <div class="media border">
+      <img class="align-self-start mr-3 foto" src="/images/uploads/<%=anuncio.foto %>" alt=" Generic placeholder image">
+      <div class="media-body">
+        <h5> <%= anuncio.nombre %></h5>
+        <p class="card-text"> <%= venta %></p>
+        <p class="card-text"> <% __('Price:') %> <%= anuncio.precio %> €</p>
+        <p class="card-text"> Tags: <%= anuncio.tags %></p>
+
+      </div>
+    </div>
+
+
+
+    <% }) %>
+
+    <script>
+
+      async function main() {
+
+
+      }
+
+    </script>
+  </body>
+
+
+
+  <% include footer.html %>

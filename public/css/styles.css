@@ -1,0 +1,21 @@
+    #mainNav {
+        background-color: black;
+    }
+
+    .formulario {
+        padding-top: 100px;
+        padding-bottom: 10px;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-radius: 5px black;
+    }
+
+    .form_check {
+        padding-left: 20px;
+    }
+
+    
+    .col-lg-7{
+        text-align: center;
+        position: static; 
+        }
