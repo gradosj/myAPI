@@ -6,7 +6,6 @@
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "dev": "cross-env DEBUG=nodeapi:* NODE_ENV=development nodemon ./bin/www",
     "install-db": "node install-db.js"
-    
   },
   "dependencies": {
     "bcrypt": "^4.0.1",
