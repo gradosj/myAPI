@@ -1,5 +1,5 @@
 'use strict';
-
+console.log ('pagina jose anuncios');
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -42,7 +42,7 @@ const storage = multer.diskStorage({ /* donde se guarda -- este es el que suele 
 
 const upload = multer({ storage });
 
-
+console.log('pasa por aqui');
 router.get('/', async (req, res, next) => {
     try {
 
@@ -103,6 +103,8 @@ router.get('/', async (req, res, next) => {
 
 
         res.json(docs);
+        console.log('pasa por aqui 2');
+        console.log(res.json(docs));
     } catch (err) {
         next(err);
     }
@@ -120,7 +122,7 @@ router.get('/:id', async (req, res, next) => {
             err.status = 404;
             return next(err);
         }
-
+        console.log('pasa por aqui 3');
         res.json({ result: anuncio });
 
     } catch (err) {

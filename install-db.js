@@ -27,6 +27,7 @@ async function initAnuncios() {
         venta: true,            
         precio: 200,
         foto: 'motor.jpg',
+        descripcion: 'Bicicleta de montaña',
         tags: ['lifestyle', 'motor']
     },
 
@@ -35,6 +36,7 @@ async function initAnuncios() {
         venta: true,            
         precio: 500,
         foto: 'mobile.jpg',
+        descripcion: 'Bicicleta de montaña',
         tags: ['lifestyle', 'mobile']
     },
     {   
@@ -42,6 +44,7 @@ async function initAnuncios() {
         venta: false,            
         precio: 150,
         foto: 'work.jpg',
+        descripcion: 'Bicicleta de montaña',
         tags: ['work']
     },
     {   
@@ -49,6 +52,7 @@ async function initAnuncios() {
         venta: false,            
         precio: 0.50,
         foto: 'work.jpg',
+        descripcion: 'Bicicleta de montaña',
         tags: ['lifestyle', 'mobile']
     },
     {   
@@ -56,6 +60,7 @@ async function initAnuncios() {
         venta: false,            
         precio: 10,
         foto: 'lifestyle.jpg',
+        descripcion: 'Bicicleta de montaña',
         tags: ['lifestyle']
     },
 
