@@ -60,6 +60,7 @@ const jwtAuth = require('./lib/jwtAuth'); // cargamos el generador de middleware
 
 app.use('/api/anuncios', jwtAuth(), require('./routes/anuncios'));
 app.use('/api/anuncios/post',jwtAuth(), require('./routes/api/anuncios'));
+app.use('/api/usuarios', require('./routes/users'));
 
 app.use('/api/authenticate', loginController.postJWT);
 

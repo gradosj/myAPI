@@ -1,27 +1,39 @@
-'use strict';
+"use strict";
 
-
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 // crear un esquema
 
 const usuarioSchema = mongoose.Schema({
-    email: {type: String, unique: true },
-    password: String,
+  nombre: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+  },
+  password: {
+      type: String,
+      required: true,
+  },
+  registro: {
+      type: Date,
+      default: Date.now(),
+
+  },
 });
 
-usuarioSchema.statics.hashPassword = function(plainPassword) {
-    return bcrypt.hash(plainPassword, 10);
+usuarioSchema.statics.hashPassword = function (plainPassword) {
+  return bcrypt.hash(plainPassword, 10);
 
-}
+};
 
-const Usuario = mongoose.model('Usuario', usuarioSchema);
-
-
-
+const Usuario = mongoose.model("Usuario", usuarioSchema);
 
 //exportamos el modelo
 module.exports = Usuario;
-
-
