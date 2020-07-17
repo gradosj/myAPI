@@ -6,12 +6,14 @@ var logger = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const multer = require('multer');
+const cors = require('cors');
 
 var app = express();
 // connect to database
 const mongooseConecction = require('./lib/connectMongoose');
 
 
+app.use(cors());
 
 
 // view engine setup
