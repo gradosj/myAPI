@@ -4,6 +4,7 @@ const Usuario = require('../models/Usuario.js')
 const {validationResult} = require('express-validator');
 const jwt = require('jsonwebtoken');
 
+console.log('entra por aqui');
 exports.crearUsuario = async (req, res) => {
 
     //revisar si hay errores
@@ -41,7 +42,7 @@ exports.crearUsuario = async (req, res) => {
             if(error) throw error;
 
             //mensaje de confirmacion
-            res.json({token});
+            res.status(200).json({token});
         })
 
         //guardar usuario
