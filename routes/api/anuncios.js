@@ -6,6 +6,9 @@ const multer = require('multer');
 const path = require('path');
 const cote = require('cote');
 const Anuncio = require('../../models/anuncios');
+
+
+
 const { check, validationResult } = require('express-validator');
 const rutaDestino = path.join(__dirname, '..', '..', 'public', 'images', 'uploads');
 const barra = "\\";
@@ -134,7 +137,9 @@ router.get('/:id', async (req, res, next) => {
 
 // Crea un anuncio
 // Incluimos Multer
-router.post('/', upload.single('foto'),
+router.post('/',
+    //auth,
+    upload.single('foto'),
     check('nombre').isString(),
     check('venta').isBoolean(),
     check('precio').isNumeric(),
@@ -198,8 +203,12 @@ router.post('/', upload.single('foto'),
 
             }
 
+                       
+
             const anuncioData = req.body;
+    ;
             const anuncio = new Anuncio(anuncioData);
+            anuncio.creador =  req.usuario.id;
             const anuncioGuardado = await anuncio.save();
             res.status(201).json({ result: anuncioGuardado })
         } catch (err) {
