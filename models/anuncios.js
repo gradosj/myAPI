@@ -48,13 +48,14 @@ const anuncioSchema = mongoose.Schema({
 
 //FALTA AÑADIR EL RESTO DE LOS FILTROSSS
 anuncioSchema.statics.lista = function (filtro, limit, skip, sort, fields) {
-   // console.log(Anuncio.find); 
+    console.log(filtro); 
     const query = Anuncio.find(filtro); 
 
     query.limit(limit);
     query.skip(skip);
     query.sort(sort);
     query.select(fields);
+
     return query.exec();
 
 };
