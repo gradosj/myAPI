@@ -67,6 +67,7 @@ app.use('/api/usuarios', require('./routes/users'));
 
 app.use('/api/authenticate', loginController.postJWT);
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth/login', jwtAuth(), require('./routes/auth'));
 
 
 
