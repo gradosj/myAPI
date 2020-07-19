@@ -167,13 +167,15 @@ router.post('/',
          
 
 
-            if (encontrado === false) {
+            /* if (encontrado === false) {
                 const err = new Error('Error tags, use: motor, lifestyle, mobile, work');
                 err.status = 422;
+                console.log('error1');
+                return res.status(422).json({ msg: 'Error en tags', errors: errors.array() });
                 return next(err); // Send error
 
-            }
-
+            } */
+/*
             if (extension != 'png'
                 && extension != 'jpg'
                 && extension != 'bmp'
@@ -181,13 +183,17 @@ router.post('/',
             ) {
                 const err = new Error('Formato de archivo incorrecto');
                 err.status = 422;
+                console.log('error2');
+                return res.status(422).json({ msg: 'Error en extension de fichero', errors: errors.array() });
                 return next(err);
             } else {
                 req.body.foto = `mini${nombreFichero}`;
                
             }
+            */
 
-            if (!errors.isEmpty()) {
+            /* if (!errors.isEmpty()) {
+                console.log('error3');
                 return res.status(422).json({ errors: errors.array() }); //Validations response
             } else {
 
@@ -202,7 +208,7 @@ router.post('/',
                 });
 
             }
-
+ */
                        
 
             const anuncioData = req.body;
