@@ -48,7 +48,8 @@ const upload = multer({ storage });
 console.log('pasa por aqui');
 router.get('/', async (req, res, next) => {
     try {
-
+        
+        console.log('entra por el get normal');
         const venta = req.query.venta;
         const limit = parseInt(req.query.limit || 10); // limit result
         const skip = parseInt(req.query.skip);
@@ -117,7 +118,10 @@ router.get('/', async (req, res, next) => {
 // realizamos peticiones por id
 router.get('/:id', async (req, res, next) => {
     try {
+        console.log('entra por el get id');
         const _id = req.params.id;
+
+        console.log(_id);
 
         const anuncio = await Anuncio.findOne({ _id: _id });
         if (!anuncio) {

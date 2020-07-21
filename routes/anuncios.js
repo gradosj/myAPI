@@ -63,5 +63,30 @@ router.get('/', async (req, res, next) => {
 });
 
 
+// realizamos peticiones por id
+router.get('/:id', async (req, res, next) => {
+    try {
+        console.log('entra por el get id');
+        const _id = req.params.id;
+
+        console.log(_id);
+
+        const anuncio = await Anuncio.findOne({ _id: _id });
+        if (!anuncio) {
+            const err = new Error('not found');
+            err.status = 404;
+            return next(err);
+        }
+        console.log('pasa por aqui 3');
+        res.json({ result: anuncio });
+
+    } catch (err) {
+        next(err);
+
+    }
+
+});
+
+
 
 module.exports = router;
