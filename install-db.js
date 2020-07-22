@@ -36,7 +36,7 @@ async function initAnuncios() {
         venta: true,            
         precio: 500,
         foto: 'mobile.jpg',
-        descripcion: 'Bicicleta de montaña',
+        descripcion: 'Telefono iphone5 usado',
         tags: ['lifestyle', 'mobile']
     },
     {   
@@ -44,7 +44,7 @@ async function initAnuncios() {
         venta: false,            
         precio: 150,
         foto: 'work.jpg',
-        descripcion: 'Bicicleta de montaña',
+        descripcion: 'Pantalla de pc con hdmi',
         tags: ['work']
     },
     {   
@@ -52,7 +52,7 @@ async function initAnuncios() {
         venta: false,            
         precio: 0.50,
         foto: 'work.jpg',
-        descripcion: 'Bicicleta de montaña',
+        descripcion: 'Mascarilla triple capa',
         tags: ['lifestyle', 'mobile']
     },
     {   
@@ -60,7 +60,7 @@ async function initAnuncios() {
         venta: false,            
         precio: 10,
         foto: 'lifestyle.jpg',
-        descripcion: 'Bicicleta de montaña',
+        descripcion: 'Sudadera urban style',
         tags: ['lifestyle']
     },
 

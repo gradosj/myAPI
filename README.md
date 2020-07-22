@@ -64,7 +64,7 @@ public\images\uploads
 Se ha creado un microservicio para realizar una miniatura de la imagen creada en el POST, para la ejecucion se debe lanzar el proceso de: 
 
 ```
-myAPI/lib/componenteExterno/comversorIMG.js
+myAPI/lib/componenteExterno/conversorIMG.js
 comando: npm run conversorIMG.js
 
 ```
