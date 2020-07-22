@@ -1,5 +1,4 @@
 'use strict';
-console.log ('pagina jose anuncios Privados');
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -66,7 +65,7 @@ router.get('/', async (req, res, next) => {
 
         }
 
-        console.log(req.usuario.id);
+    
 
         filtro.creador = req.usuario.id;
 
@@ -74,8 +73,7 @@ router.get('/', async (req, res, next) => {
         const query = Anuncio.lista({creador: req.usuario.id}); 
 
         res.json(query);
-        console.log('pasa por aqui 2');
-        console.log(res.json(docs));
+       
     } catch (err) {
         next(err);
     }

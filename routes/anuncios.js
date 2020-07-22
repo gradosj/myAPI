@@ -56,7 +56,7 @@ router.get('/', async (req, res, next) => {
 		res.json(docs);
 		
 		
-		console.log('pasa por aqui 5');
+		
 	} catch (err) {
 		next(err);
 	}
@@ -66,10 +66,10 @@ router.get('/', async (req, res, next) => {
 // realizamos peticiones por id
 router.get('/:id', async (req, res, next) => {
     try {
-        console.log('entra por el get id');
+        
         const _id = req.params.id;
 
-        console.log(_id);
+       
 
         const anuncio = await Anuncio.findOne({ _id: _id });
         if (!anuncio) {
@@ -77,7 +77,7 @@ router.get('/:id', async (req, res, next) => {
             err.status = 404;
             return next(err);
         }
-        console.log('pasa por aqui 3');
+        
         res.json({ result: anuncio });
 
     } catch (err) {

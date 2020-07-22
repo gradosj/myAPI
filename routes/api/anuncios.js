@@ -1,5 +1,5 @@
 'use strict';
-console.log ('pagina jose anuncios');
+
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
@@ -45,11 +45,11 @@ const storage = multer.diskStorage({ /* donde se guarda -- este es el que suele 
 
 const upload = multer({ storage });
 
-console.log('pasa por aqui');
+
 router.get('/', async (req, res, next) => {
     try {
         
-        console.log('entra por el get normal');
+   
         const venta = req.query.venta;
         const limit = parseInt(req.query.limit || 10); // limit result
         const skip = parseInt(req.query.skip);
@@ -107,8 +107,7 @@ router.get('/', async (req, res, next) => {
 
 
         res.json(docs);
-        console.log('pasa por aqui 2');
-        console.log(res.json(docs));
+        
     } catch (err) {
         next(err);
     }
@@ -118,10 +117,10 @@ router.get('/', async (req, res, next) => {
 // realizamos peticiones por id
 router.get('/:id', async (req, res, next) => {
     try {
-        console.log('entra por el get id');
+       
         const _id = req.params.id;
 
-        console.log(_id);
+        
 
         const anuncio = await Anuncio.findOne({ _id: _id });
         if (!anuncio) {
@@ -129,7 +128,7 @@ router.get('/:id', async (req, res, next) => {
             err.status = 404;
             return next(err);
         }
-        console.log('pasa por aqui 3');
+       
         res.json({ result: anuncio });
 
     } catch (err) {
@@ -171,48 +170,7 @@ router.post('/',
          
 
 
-            /* if (encontrado === false) {
-                const err = new Error('Error tags, use: motor, lifestyle, mobile, work');
-                err.status = 422;
-                console.log('error1');
-                return res.status(422).json({ msg: 'Error en tags', errors: errors.array() });
-                return next(err); // Send error
-
-            } */
-/*
-            if (extension != 'png'
-                && extension != 'jpg'
-                && extension != 'bmp'
-                && extension != 'jpeg'
-            ) {
-                const err = new Error('Formato de archivo incorrecto');
-                err.status = 422;
-                console.log('error2');
-                return res.status(422).json({ msg: 'Error en extension de fichero', errors: errors.array() });
-                return next(err);
-            } else {
-                req.body.foto = `mini${nombreFichero}`;
-               
-            }
-            */
-
-            /* if (!errors.isEmpty()) {
-                console.log('error3');
-                return res.status(422).json({ errors: errors.array() }); //Validations response
-            } else {
-
-                const requester = new cote.Requester({ name: 'currency client' });
-
-                requester.send({
-                    type: 'resize image',
-                    name: nombreFichero,
-
-                }, resultado => {
-                    console.log('respuesta: ', resultado, ' ', Date.now());
-                });
-
-            }
- */
+            
                        
 
             const anuncioData = req.body;

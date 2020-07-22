@@ -1,4 +1,8 @@
-# NODEPOP - PRACTICA FUNDAMENTOS NODE
+# NODEPOP - PRACTICA BACK BOOTCAMP
+Puesto que no me ha dado tiempo el subir la practica en su totalidad al servidor, se debera de probar de forma local. 
+back: https://github.com/gradosj/myAPI.git (abrir en puerto 3000)
+front: https://github.com/gradosj/wallafront
+
 Practica de proyecto Fundamentos Node.
 
 # Descripcion
@@ -30,24 +34,29 @@ npm run dev
 
 
 # Metodos
-La V1 de la API tiene dos funcionalidades, la lista y la creacion de anuncion (GEST y POST).
+La V1 de la API tiene las funcionalidades de mostrar y filtrar anuncios, publicar, modificar anuncios, eliminar anuncios, crear usuario y login.
+
+
+# Crear usuario 
+
+```
+/api/usuarios
+
+```
 
 # Autenticacion
 Para empezar es necesario realizar una peticion post para el login. Esta peticion devolvera el token que puede utilizarse para el resto de funcionalidades pasandoselo como query param. 
 
 ```
-url/api/authenticate
-```
-
-Hay creados dos usuarios / passwords 
+/api/auth
 
 ```
- jose@example.com // user@example.com password: 1234
 
-``` 
 
 # Post
 Para publicar un anuncio hay que realizar una peticion POST con el token recuperado en la autenticacion: 
+
+puede ir de cabecera o como query params
 
 ```
 url/api/anuncios/post?token=xxxxxxxxx
@@ -76,6 +85,7 @@ const anuncioSchema = mongoose.Schema({
     nombre: String, /* Obligatorio */
     venta: Boolean, /* Obligatorio */
     precio: Number, /* Obligatorio */
+    decripcion: String /* Obligatorio */
     foto: String,   /* Opcional */
     tags: [String]  /* 1 obligatorio (work, lifestyle, mobile, motor) */
 
@@ -100,19 +110,8 @@ devuelve consultas tipo:
 "nombre": "bicicleta",
 "venta": true,
 "precio": 200,
+"descrpcion": pruebas
 "foto": "/images/work.jpg",
-"__v": 0
-},
-{
-"tags": [
-"lifestyle",
-"motor"
-],
-"_id": "5e6e93ba7b438a3c90da5bc3",
-"nombre": "iphone",
-"venta": true,
-"precio": 500,
-"foto": "/images/mobile.jpg",
 "__v": 0
 },
 

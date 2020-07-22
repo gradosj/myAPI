@@ -14,7 +14,7 @@ exports.autenticarUsuario = async (req, res) => {
   //extreamos mail y password
   const { email, password } = req.body;
 
-  console.log(email);
+  //console.log(email);
 
   try {
     //revisar que sea un usuario registrado
@@ -62,11 +62,11 @@ exports.autenticarUsuario = async (req, res) => {
 exports.usuarioAutenticado = async (req,res) => {
   try {
     const usuario = await Usuario.findById(req.usuario.id).select('-password');
-    console.log(usuario);
+    
     res.json({usuario});
     
   } catch (error) {
-    console.log(error);
+    
     res.status(500).json({msg: 'Hubo un error'});
     
   }

@@ -54,11 +54,11 @@ router.get("/", async (req, res, next) => {
     const docs = await Anuncio.lista(filtro, limit, skip, sort, fields);
 
     res.locals.anuncios = docs;
-    //console.log(res.json(docs));
+   
     //res.render('index'); vamos a devolver el .json
     res.json(docs);
 
-    console.log("pasa por aqui 299");
+    
   } catch (err) {
     next(err);
   }
@@ -67,6 +67,8 @@ router.get("/", async (req, res, next) => {
 //Actualizar un anuncio
 
 router.put("/:id", async (req, res, next) => {
+
+ 
   try {
     check("nombre").isString();
     check("venta").isBoolean();
@@ -82,8 +84,7 @@ router.put("/:id", async (req, res, next) => {
 
     const { nombre, venta, precio, descripcion, foto } = req.body;
 
-    console.log("Query ", req.query);
-    console.log("Body ", req.body);
+  
 
     const nuevoAnuncio = {};
 
@@ -107,14 +108,14 @@ router.put("/:id", async (req, res, next) => {
       nuevoAnuncio.foto = foto;
     }
 
-    console.log("Lo que llega", nuevoAnuncio);
+  
 
     try {
       //revisar el ID
-      console.log(req.params.id);
+   
       let anuncio = await Anuncio.findById(req.params.id);
 
-      console.log(anuncio);
+    
 
       //Si el proyecto existe
 
@@ -134,11 +135,11 @@ router.put("/:id", async (req, res, next) => {
         { new: true }
       );
 
-      console.log(anuncio);
+    
 
       res.json({ anuncio });
     } catch (error) {
-      console.log(error);
+      
       res.status(500).send("Error en el servidor");
     }
   } catch (err) {
@@ -148,24 +149,29 @@ router.put("/:id", async (req, res, next) => {
 
 //eliminar proyecto por id
 router.delete("/:id", async (req, res, next) => {
+
+  
   try {
     //revisar el ID
-    console.log(req.params.id);
+    
     let anuncio = await Anuncio.findById(req.params.id);
 
-    console.log(anuncio);
+    
 
     //Si el proyecto existe
 
     if (!anuncio) {
       return res.status(404).json({ msg: "Proyecto no encontrado" });
     }
-
+  
     //verificar el creador
-    if (anuncio.creador.toString() !== req.usuario.id) {
-      return res.status(401).json({ msg: "No autorizado" });
-    }
+    
 
+    /*
+    if (anuncio.creador.toString() !== req.params.id) {
+      return res.status(401).json({ msg: "No autorizado" });
+    }*/
+   
     // eliminar
 	await Anuncio.findOneAndRemove({ _id: req.params.id });
 	res.json({msg:'Anuncio Eliminado'});
@@ -173,7 +179,7 @@ router.delete("/:id", async (req, res, next) => {
 
     
   } catch (error) {
-    console.log(error);
+    
     res.status(500).send("Error en el servidor");
   }
 });
